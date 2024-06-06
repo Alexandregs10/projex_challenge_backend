@@ -45,7 +45,7 @@ def get_gatos():
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # Método que retorna uma lista de todos os gatos mais velhos com a mesma idade
-@router.post("/gatos-mais-velhos")
+@router.get("/gatos-mais-velhos")
 def get_gatos_mais_velhos():
     try:
         # Encontra a idade máxima entre todos os gatos
