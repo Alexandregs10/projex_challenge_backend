@@ -7,6 +7,9 @@ router = APIRouter()
 class nome(BaseModel):
     nome: str
 
+class raca(BaseModel):
+    raca: str
+
 
 # Método que recebe um ID e retorna os dados do gato e sua data de nascimento
 @router.get("/gato/{id}")
@@ -92,9 +95,12 @@ def buscar_gatos_por_nome(nome: nome):
 
 # Método que busca gatos por raça
 @router.post("/buscar-raca")
-def buscar_gatos_por_raca(raca: str = Body(...)):
+def buscar_gatos_por_raca(raca: raca):
     try:
-        gatos_encontrados = [gato.__dict__ for gato in lista_gatos if gato.raca.lower() == raca.lower()]
+        gatos_encontrados = [
+            gato.__dict__ for gato in lista_gatos 
+            if gato.raca.lower() == raca.raca.lower()
+            ]
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
         return HTTPException(status_code=500, detail="Internal Server Error")
