@@ -1,7 +1,12 @@
 from fastapi import APIRouter, Body, HTTPException
 from app.models.cat_question import lista_gatos, datas_nascimento
+from pydantic import BaseModel
 
 router = APIRouter()
+
+class nome(BaseModel):
+    nome: str
+
 
 # Método que recebe um ID e retorna os dados do gato e sua data de nascimento
 @router.get("/gato/{id}")
@@ -73,28 +78,23 @@ def get_gatos_mais_velhos():
 
 # Método que busca gatos por um termo de busca no nome
 @router.post("/buscar-gatos")
-def buscar_gatos_por_nome(termo_busca: str = Body(...)):
+def buscar_gatos_por_nome(nome: nome):
     try:
-        # Transforma a lista de gatos em um dicionário onde as chaves são os IDs
-        dict_gatos = {gato.id: gato for gato in lista_gatos}
-        
-        gatos_encontrados = []
-        for gato_id, gato in dict_gatos.items():
-            if termo_busca.lower() in gato.nome.lower():
-                
-                # Adiciona o gato encontrado ao resultado, excluindo o atributo idade
-                gatos_encontrados.append(gato)
+        # Utilizando list comprehension diretamente na lista de gatos
+        gatos_encontrados = [
+            gato for gato in lista_gatos
+            if nome.nome.lower() in gato.nome.lower()
+        ]
         
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
-        raise HTTPException(status_code=200, detail="Internal Server Error")
-
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # Método que busca gatos por raça
-@router.get("/buscar-raca")
-def buscar_gatos_por_raca(termo_busca: str = Body(...)):
+@router.post("/buscar-raca")
+def buscar_gatos_por_raca(raca: str = Body(...)):
     try:
-        gatos_encontrados = [gato.__dict__ for gato in lista_gatos if gato.raca.lower() == termo_busca.lower()]
+        gatos_encontrados = [gato.__dict__ for gato in lista_gatos if gato.raca.lower() == raca.lower()]
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
         return HTTPException(status_code=500, detail="Internal Server Error")
