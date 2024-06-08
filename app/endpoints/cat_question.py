@@ -41,7 +41,6 @@ def get_gatos():
     try:
         gatos_sem_data_nascimento = []
         for gato in lista_gatos:
-            return lista_gatos
             if not any(d['id'] == gato.id for d in datas_nascimento):
                 gatos_sem_data_nascimento.append({
                     'id': gato.id,
