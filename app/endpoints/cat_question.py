@@ -15,7 +15,7 @@ class raca(BaseModel):
 @router.get("/gato/{id}")
 def get_gato_por_id(id: int):
     try:
-        gato = next((g for g in lista_gatos if g.id == id), None)
+        gato = next((gato for gato in lista_gatos if gato.id == id), None)
         data_nascimento = next((d['data_nascimento'] for d in datas_nascimento if d['id'] == id), None)
         return {
             'id': gato.id,
