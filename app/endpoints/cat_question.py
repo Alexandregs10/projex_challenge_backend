@@ -84,22 +84,35 @@ def buscar_gatos_por_nome(nome: nome):
     try:
         # Utilizando list comprehension diretamente na lista de gatos
         gatos_encontrados = [
-            gato for gato in lista_gatos
+            { 
+                'id': gato.id,
+                'nome': gato.nome,
+                'raca': gato.raca,
+                'idade': gato.idade,
+                'data_nascimento': [d['data_nascimento'] for d in datas_nascimento if d['id'] == gato.id]
+            } 
+            for gato in lista_gatos 
             if nome.nome.lower() in gato.nome.lower()
-        ]
-        
+        ]   
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
         raise HTTPException(status_code=500, detail="Internal Server Error")
-
+        
 # Método que busca gatos por raça
 @router.post("/buscar-raca")
 def buscar_gatos_por_raca(raca: raca):
     try:
         gatos_encontrados = [
-            gato.__dict__ for gato in lista_gatos 
-            if gato.raca.lower() == raca.raca.lower()
-            ]
+            { 
+                'id': gato.id,
+                'nome': gato.nome,
+                'raca': gato.raca,
+                'idade': gato.idade,
+                'data_nascimento': [d['data_nascimento'] for d in datas_nascimento if d['id'] == gato.id]
+            } 
+            for gato in lista_gatos 
+            if raca.raca.lower() in gato.raca.lower()
+        ]   
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
         return HTTPException(status_code=500, detail="Internal Server Error")
