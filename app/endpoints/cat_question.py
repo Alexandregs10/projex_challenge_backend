@@ -79,7 +79,7 @@ def get_gatos_mais_velhos():
         return HTTPException(status_code=500, detail="Internal Server Error")
 
 # Método que busca gatos por um termo de busca no nome
-@router.post("/buscar-gatos")
+@router.get("/buscar-gatos")
 def buscar_gatos_por_nome(nome: nome):
     try:
         # Utilizando list comprehension diretamente na lista de gatos
@@ -99,7 +99,7 @@ def buscar_gatos_por_nome(nome: nome):
         raise HTTPException(status_code=500, detail="Internal Server Error")
         
 # Método que busca gatos por raça
-@router.post("/buscar-raca")
+@router.get("/buscar-raca")
 def buscar_gatos_por_raca(raca: raca):
     try:
         gatos_encontrados = [
