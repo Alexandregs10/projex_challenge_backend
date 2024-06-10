@@ -1,20 +1,4 @@
-# Desafio Estágio Projex Consulting
-![Python](https://img.shields.io/badge/python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)&nbsp;
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)&nbsp;
-
-Desafio Estágio de Desenvolvimento Projex Consulting 2024.
-
-## Sobre o desafio
-
-Parabéns, você foi selecionado(a) para a etapa de desafio de programação.\
-Por favor leia atentamente as instruções a seguir:
-
-- O desafio terá 1 semana de duração
-- Serão avaliadas suas habilidades de resolução de problemas, raciocínio lógico e conhecimentos da linguagem Python e FastAPI
-
-## Objetivo
-
-Você recebeu um BackEnd simples de API de gatos, seu objetivo é consertar o código de forma a fazer com que ele rode sem erros, para testar a API use o Postman, ThunderClient ou qualquer outra ferramenta para fazer chamadas de API.
+# Desafio Estágio de Desenvolvimento Projex Consulting 2024.
 
 ## Dependências
 
@@ -35,59 +19,24 @@ Rode o projeto com:
 ```sh
 py run.py
 ```
+# Para testar a API use o Postman, ThunderClient ou qualquer outra ferramenta para fazer chamadas de API.
 
-## Dica
+# Endpoints para teste
+GET http://127.0.0.1:8000/cat_question/gato/{id}
 
-Para visualizar os endpoints acesse este link no seu navegador após rodar o projeto
+GET http://127.0.0.1:8000/cat_question/gato
 
-```sh
-localhost:8000/docs
-```
+GET http://127.0.0.1:8000/cat_question/gatos-mais-velhos
 
-## Respostas esperadas
-
-### Questão 1 e 3
-Deve retornar um corpo semelhante a esse:
-
-```sh
+GET http://127.0.0.1:8000/cat_question/buscar-gatos
+Parâmetros no body:
 {
-    "id": 0,
-    "nome": "Qualquer",
-    "raca": "Qualquer",
-    "idade": 0,
-    "data_nascimento": "0000-00-00"
+    "nome": "Tom"
 }
-```
 
-### Questão 2
-Deve retornar um corpo semelhante a esse:
-
-```sh
+GET http://127.0.0.1:8000/cat_question/buscar-raca
+Parâmetros no body:
 {
-    "id": 0,
-    "nome": "Qualquer",
-    "raca": "Qualquer",
+    "raca": "Persa"
 }
-```
-
-### Questão 4 e 5
-Deve retornar um corpo semelhante a esse:
-
-```sh
-[
-    {
-        "id": 0,
-        "nome": "Qualquer",
-        "raca": "Qualquer",
-        "idade": 0,
-        "data_nascimento": "0000-00-00"
-    },
-    {
-        "id": 0,
-        "nome": "Qualquer",
-        "raca": "Qualquer",
-        "idade": 0,
-        "data_nascimento": "0000-00-00"
-    }
-]
-```
+    
